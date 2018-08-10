@@ -1,0 +1,26 @@
+// Dictionary Map example
+    // this function takes in a string and returns the number of characters (case insensitive) in the string that have duplicates elsewhere in the string
+    public static int DuplicateCount(string str)
+    {
+        Dictionary<char, int> count = new Dictionary<char, int>();
+            int sum = 0;
+            
+            for (int i = 0; i < str.Length; i++){
+            char c = Char.ToLower(str[i]);
+                if (count.ContainsKey(c)){
+                    count[c]++;
+                }else{
+                    count.Add(c, 1);
+                }
+            }
+            
+            foreach( KeyValuePair<char, int> kvp in count ){
+                if (kvp.Value >= 2) sum++;	
+        }
+            
+            return sum;
+    }
+
+
+
+
