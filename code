@@ -1,12 +1,13 @@
 /* 
 This website contains a ton of great info for C#:
-http://www.csharp-examples.net/list/
+http://www.csharp-examples.net
 
 The list code examples are taken from there
+http://www.csharp-examples.net/list/
 */ 
 
 
-// Dictionary Map
+// Dictionary Map - System.Collections.Generic
     // this function takes in a string and returns the number of characters (case insensitive) in the string that have duplicates elsewhere in the string
     public static int DuplicateCount(string str)
     {
@@ -29,7 +30,7 @@ The list code examples are taken from there
             return sum;
     }
 
-// Array - fixed length
+// Array - fixed length - System.Collections.Generic
     int[] test = new int[] { 97, 92, 81, 60 };
     int[] test2 = new int[4]; // { 0, 0, 0, 0 }
     test2[1] = 6; // { 0, 6, 0, 0 }
@@ -44,7 +45,7 @@ The list code examples are taken from there
     test = temp.ToArray(); // { 97, 81, 60 }
 
 
-// List - dynamic length
+// List - dynamic length - System.Collections.Generic
     // create
     var list1 = new List<int>();
     List<int> list2 = new List<int>(); // same
@@ -123,3 +124,19 @@ The list code examples are taken from there
     // check if all itesm in the list match a certian critera (returns true or false)
     bool allLessThanTen = list6.TrueForAll(x => x < 10); // True
     bool allEvenNumbers = list6.TrueForAll(x => x % 2 == 0); // False
+
+// Math methods for collections - System.Linq **These work for both arrays AND lists (and possibly other things too) 
+    var arr = new int[4] {1, 5, 9, 13};
+    var list7 = new List<int>() {1, 5, 9, 13};
+
+    arr.Sum(); // 28
+    list7.Sum(); // 28
+
+    int sum = (from x in list7 where x > 4 select x).Sum(); // 27 (sums numbers that meet the listed criteria)
+
+    .Max(); // finds largest number in numeric collection
+    .Min(); // finds smallest number in numeric collection
+    .Count(); // gets the number of items in the collection (.Length)
+    .Average(); // avergaes the numbers in a numeric collection
+    .Aggregate( (result, item) => /*do something here*/ ); // applies the supplied callback function to each item in the array for example:
+        list7.Aggregate( (result, item) => result * item); // 585 (multiplies all items in the array);
