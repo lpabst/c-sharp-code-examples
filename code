@@ -2,7 +2,7 @@
 This website contains a ton of great info for C#:
 http://www.csharp-examples.net/list/
 
-A lot of these code examples are taken from there, or were learned there
+The list code examples are taken from there
 */ 
 
 
@@ -68,15 +68,58 @@ A lot of these code examples are taken from there, or were learned there
     var conv = new Converter<int, decimal>(x => (decimal)x);
     var list5 = list4.ConvertAll<decimal>(conv); // {5.0, 13.0, 10.0, 8.0, 18.0, 33.0} (now all type decimal)
 
-    // convenient methods available for lists
-        // returns a new list of all items in the list that match the function passed in
-        var results = list4.FindAll(x => x > 15); // {18, 33}
+    // returns a new list of all items in the list that match the function passed in
+    var results = list4.FindAll(x => x > 15); // {18, 33}
+    
+    // sames as foreach(int x in list4){...}
+    list4.ForEach( x => {
+        Console.WriteLine(x); 
+    })
+    
+    // equivalent to slicing an array in JS = .GetRange();
+    // .GetRange(index, count);
+    // list4 currently equals {5, 13, 10, 8, 18, 33}
+    var jsSliceEquivalent = list4.GetRange(2, 3); // {10, 8, 18} slices starting at 'index' and gets 'count' number of indexes
+
+    // insert item/list into middle of array (kind of like splicing into an array in JS)
+        // listName.Insert(index, newItem)
+        list4.Insert(3, 77); // {5, 13, 10, 77, 8, 18, 33}
+        // listName.Insert(index, listToInsert)
+        list4.InsertRange(1, list1); // {5, 18, 33, 13, 10, 77, 8, 18, 33}
+
+    // removes first instance of item from list (like splicing out of array in JS)
+    list4.Remove(33); // {5, 18, 13, 10, 77, 8, 18, 33}
+
+    // removes ALL instances of item from list
+    list4.RemoveAll(18); // {5, 13, 10, 77, 8, 33}
+
+    // removes selected INDEX/INDEXES from array
+        list4.RemoveAt(1); // {5, 10, 77, 8, 33}
+
+        // .RemoveRange(index, count);
+        list4.RemoveRange(0, 2); // {77, 8, 33} removes a count of 2, so removes indexes 0 & 1
+
+    // reverse entire array or part of it
+        var list6 = new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9};
         
-        // sames as foreach(int x in list4){...}
-        list4.ForEach( x => {
-            Console.WriteLine(x); 
-        })
-        
-        // equivalent to slicing an array in JS = .GetRange();
-        // list4 = {5, 13, 10, 8, 18, 33}
-        var jsSliceEquivalent = list4.GetRange(index: 2, count: 3); // {10, 8, 18} slices starting at 'index' and gets 'count' number of indexes
+        // entire array
+        list6.Reverse(); // {9, 8, 7, 6, 5, 4, 3, 2, 1}
+
+        // part of the array
+        // .Reverse(index, count)
+        list6.Reverse(5, 3); // {9, 8, 7, 6, 5, 2, 3, 4, 1} - reversed just "2, 3, 4"
+
+    // sort list -  only works if the data type implements IComparable<T> or IComparable interface. (only works if items are sortable, like ints, or if you build a custom compare class that implements the IComparable interface)
+    list6.Sort(); // {1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+    // .Sort(index, count, custom comparer) - sorts just part of a list based on the custom comparer you build
+        // example of custom comparer:
+        public class MyComparer : IComparer<int>
+        {
+            public int Compare(int x, int y) { return y.CompareTo(x); } // y.CompartTo(x) will sort is descending order
+        }
+        list6.Sort(2, 3, new MyComparer()); // {1, 2, 5, 4, 3, 6, 7, 8, 9} just sorts indexes 2-4 (starts at index 2 for a count of 3)
+
+    // check if all itesm in the list match a certian critera (returns true or false)
+    bool allLessThanTen = list6.TrueForAll(x => x < 10); // True
+    bool allEvenNumbers = list6.TrueForAll(x => x % 2 == 0); // False
