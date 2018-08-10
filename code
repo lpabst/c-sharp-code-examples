@@ -1,4 +1,12 @@
-// Dictionary Map example
+/* 
+This website contains a ton of great info for C#:
+http://www.csharp-examples.net/list/
+
+A lot of these code examples are taken from there, or were learned there
+*/ 
+
+
+// Dictionary Map
     // this function takes in a string and returns the number of characters (case insensitive) in the string that have duplicates elsewhere in the string
     public static int DuplicateCount(string str)
     {
@@ -21,6 +29,54 @@
             return sum;
     }
 
+// Array - fixed length
+    int[] test = new int[] { 97, 92, 81, 60 };
+    int[] test2 = new int[4]; // { 0, 0, 0, 0 }
+    test2[1] = 6; // { 0, 6, 0, 0 }
+
+    foreach (int i in test2){
+        System.Console.WriteLine(i); // prints 0, 6, 0, 0 (each on a new line)
+    }
+
+    // an array is a fixed length, so removing an index requires using a list as a translator if you will
+    var temp = new List<int>(test); // { 97, 92, 81, 60 }
+    temp.RemoveAt(1);
+    test = temp.ToArray(); // { 97, 81, 60 }
 
 
+// List - dynamic length
+    // create
+    var list1 = new List<int>();
+    List<int> list2 = new List<int>(); // same
+    List<int> list3 = new List<int>() {5, 13, 6, 8}; // same, but it puts some initial values in there
+    
+    // copy
+    var list4 = new List<int>(list3); // copies list3 into the new variable list4. you can also copy an array into a list this way
 
+    // update/edit
+    list1.Add(18); // {18}
+    list1.Add(33); // {18, 33}
+    list4[2] = 10; // {5, 13, 10, 8}
+    list4.AddRange(list1); // {5, 13, 10, 8, 18, 33} - concatenates the 2 lists together
+    int index = list4.BinarySearch(8); // 3 (gets the zero based index)
+    int index2 = list4.BinarySearch(99); // -4 (returns a neg num if item isn't found in list)
+    list3.Clear(); // {} list3 is now empty
+    bool contains8 = list4.Contains(8); // true
+    bool contains99 = list4.Contains(99); // false
+
+    // convert data type inside list
+    var conv = new Converter<int, decimal>(x => (decimal)x);
+    var list5 = list4.ConvertAll<decimal>(conv); // {5.0, 13.0, 10.0, 8.0, 18.0, 33.0} (now all type decimal)
+
+    // convenient methods available for lists
+        // returns a new list of all items in the list that match the function passed in
+        var results = list4.FindAll(x => x > 15); // {18, 33}
+        
+        // sames as foreach(int x in list4){...}
+        list4.ForEach( x => {
+            Console.WriteLine(x); 
+        })
+        
+        // equivalent to slicing an array in JS = .GetRange();
+        // list4 = {5, 13, 10, 8, 18, 33}
+        var jsSliceEquivalent = list4.GetRange(index: 2, count: 3); // {10, 8, 18} slices starting at 'index' and gets 'count' number of indexes
