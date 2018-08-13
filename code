@@ -12,25 +12,36 @@ http://www.csharp-examples.net/list/
     public static int DuplicateCount(string str)
     {
         Dictionary<char, int> count = new Dictionary<char, int>();
-            int sum = 0;
-            
-            for (int i = 0; i < str.Length; i++){
-            char c = Char.ToLower(str[i]);
-                if (count.ContainsKey(c)){
-                    count[c]++;
-                }else{
-                    count.Add(c, 1);
-                }
+        int sum = 0;
+        
+        for (int i = 0; i < str.Length; i++){
+        char c = Char.ToLower(str[i]);
+            if (count.ContainsKey(c)){
+                count[c]++;
+            }else{
+                count.Add(c, 1);
             }
-            
-            foreach( KeyValuePair<char, int> kvp in count ){
-                if (kvp.Value >= 2) sum++;	
+        }
+        
+        foreach( KeyValuePair<char, int> kvp in count ){
+            if (kvp.Value >= 2) sum++;	
         }
             
             return sum;
     }
 
+    // create Dictionary with some values
+     Dictionary<string, string> match = new Dictionary<string, string>()
+    {
+        {"NORTH", "SOUTH"},
+        {"SOUTH", "NORTH"},
+        {"EAST", "WEST"},
+        {"WEST", "EAST"}
+    };
+
 // Array - fixed length - System.Collections.Generic
+    arr.Length; 
+
     int[] test = new int[] { 97, 92, 81, 60 };
     int[] test2 = new int[4]; // { 0, 0, 0, 0 }
     test2[1] = 6; // { 0, 6, 0, 0 }
@@ -46,6 +57,8 @@ http://www.csharp-examples.net/list/
 
 
 // List - dynamic length - System.Collections.Generic
+    list.Count; 
+
     // create
     var list1 = new List<int>();
     List<int> list2 = new List<int>(); // same
@@ -140,3 +153,12 @@ http://www.csharp-examples.net/list/
     .Average(); // avergaes the numbers in a numeric collection
     .Aggregate( (result, item) => /*do something here*/ ); // applies the supplied callback function to each item in the array for example:
         list7.Aggregate( (result, item) => result * item); // 585 (multiplies all items in the array);
+
+// String
+
+
+
+// Char
+
+
+
