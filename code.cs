@@ -215,6 +215,22 @@ http://www.csharp-examples.net/list/
     str10 = str8.Trim(charsToTrim); // "this has leading and ending spaces" - trimmed not only blank spaces from beginning/end, but also trimmed off the '*' characters
 
 // Char
+    var boolean = 'a'.Equals('a'); // true
+    var hash = 'a'.GetHashCode(); // 6357089
 
+    Char.IsControl('a'); // false
+    Char.IsDigit('5'); // true
+    Char.IsLetter('A'); // true
+    Char.IsNumber('0'); // true
+    Char.IsPunctuation('?'); // true
+    Char.IsSeparator(' '); // true
+    Char.IsSymbol('j'); // false
+    Char.IsWhiteSpace(' '); // true
 
+    Char.IsLower('a'); // true 
+    Char.IsUpper('a'); // false 
 
+    Char.ToLower('A'); // a
+    Char.ToUpper('b'); // B
+
+    Char.ToString('h'); // "h" - turns it into a string
