@@ -39,6 +39,11 @@ http://www.csharp-examples.net/list/
         {"WEST", "EAST"}
     };
 
+// Object methods
+    int n1 = 7;
+    n1.GetType(); // System.Int32 - returns data type
+
+
 // Array - fixed length - System.Collections.Generic
     arr.Length; 
 
@@ -155,8 +160,59 @@ http://www.csharp-examples.net/list/
         list7.Aggregate( (result, item) => result * item); // 585 (multiplies all items in the array);
 
 // String
+    string str1 = "this is a sentence.";
+    string str2 = String.Copy(str1); // creates new reference, values are equal - "this is a sentence."
+    
+    str2.Contains("sent"); // true - checks if str2 contains substring of "sent"
+    
+    str2.EndsWith("sent"); // false - checks if str2 ends with substring of "sent"
+    str2.EndsWith("."); // true - checks if str2 ends with substring of "."
 
+    str2.StartsWith("thi"); // true - checks if str2 starts with substring of "thi"
+    
+    str1.Equals("different string"); // false - checks if 2 strings are the same
+    str1.Equals("this is a sentence."); // true - checks if 2 strings are the same
 
+    int hash = "test string".GetHashCode();
+	Console.WriteLine(hash); // returns an int: -775025514
+
+    str1.IndexOf("is"); // 2 - returns index of first occurence of the passed in string/char
+    str1.IndexOf('a'); // 8 - returns index of first occurence of the passed in string/char
+    str1.LastIndexOf('e'); // 17 - returns the index of the last occurence of the passed in string/char
+
+    String original = "aaabbb";
+    String modified = original.Insert(3, " "); // original remains unchagned "aaabbb" but modified has the update: "aaa bbb";
+
+    String.IsNullOrEmpty("something here"); // false
+    String.IsNullOrEmpty(""); // true
+    String.IsNullOrEmpty(null); // true
+
+    string[] arr = new string[]  {"this","is","a","sentence"};
+    Console.WriteLine(String.Join(", ", arr));  // "this, is, a, sentence" - joins the 2nd param array with the 1st param delimiter
+
+    var str = "separate xx me xx !";
+    var arr = str.Split(' '); // {"separate", "xx", "me", "xx", "!"} - uses passed in char as a delimeter
+
+    var newString = str1.Remove(5); // "this " - deletes index passed in, and everything after it
+    var newString = str1.Remove(5, 3); // "this a sentence" - deletes index passed in, and as many as the 2nd param 'count' passed in
+
+    var str3 = str1.Replace('i', 'j'); // "thjs js a sentence" replaces all occurences of 'i' with 'j'
+    var str3 = str1.Replace("is", "isn't"); // "this isn't a sentence" replaces all occurences of "is" with "isn't"
+
+    var str4 = str1.Substring(2); // "is is a sentence" - includes passed in index, and goes to end of string
+    var str5 = str1.Substring(2, 5); // "is is" - includes passed in index, and goes until the passed in length (param 2) is reached
+
+    char[] arr = str5.ToCharArray(); // {'i', 's', ' ', 'i', 's'} - created char[] out of string
+
+    var str6 = str5.ToUpper(); // "IS IS"
+    var str7 = str6.ToLower(); // "is is"
+
+    var str8 = "     **this has leading and ending spaces**    ";
+    var str9 = str8.Trim(); // "**this has leading and ending spaces**" - removes all leading and trailing white-space characters (original string is unchanged)
+    
+    // we can also pass a char[] into the trim function that will trim all of those characters from the start and end
+    char[] charsToTrim = { '*', ' '};
+    str10 = str8.Trim(charsToTrim); // "this has leading and ending spaces" - trimmed not only blank spaces from beginning/end, but also trimmed off the '*' characters
 
 // Char
 
